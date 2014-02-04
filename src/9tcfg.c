@@ -28,7 +28,7 @@ void status_print_reg_inv(UBYTE reg, UBYTE bit);
 
 /* -- global variables -- */
 
-static const STRPTR version = "\0$VER: 9tcfg 0.7 (19.01.2014)\0";
+static const STRPTR version = "\0$VER: 9tcfg 0.7 (19.01.2014)\0 R.Kujawa";
 static const STRPTR id = "\0$Id$\0";
 
 static LONG *argArray;	/* arguments passed on the command line */
@@ -67,19 +67,19 @@ status_display(void)
 
 	printf(" ==================== CPU / Memory options ==================== \n");
 
-	printf("\tEnable MC68000 after reset: ");
+	printf("\tMC68000 mode (after reset): ");
 	status_print_reg(r0, CFG_R0_68KMODE);
 
-	printf("\tEnable 16bit FastRAM after reset if MC68000 is enabled: ");
+	printf("\t16bit FastRam (MC68000): ");
 	status_print_reg(r0, CFG_R0_68KMEMORYMODE);
 
 	printf("\tMC68000 status: ");
 	status_print_reg(r2, CFG_R2_68KMODE_STATUS);
 
-	printf("\tPCMCIA Friendly (4MB RAM) after reset: ");
+	printf("\tPCMCIA Friendly (after reset): ");
 	status_print_reg(r0, CFG_R0_PCMCIA);
 
-	printf("\tInstruction cache: ");
+	printf("\tMC68EC020 Instruction Cache: ");
 	status_print_reg_inv(r1, CFG_R1_INSTCACHEOFF);
 	
 	printf(" ========================= ROM options ======================== \n");
@@ -191,7 +191,7 @@ main(int argc, char *argv[])
 	hwrev = ninetails_detect();
 
 	if (hwrev == -1) {
-		printf("Ninetails board not detected!\n");
+		printf("Ninetails board not detected! :(\n");
 		return EXIT_HARDWARE_ERROR;
 	} else {
 		printf("Ninetails revision %d\n", hwrev);
